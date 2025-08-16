@@ -453,27 +453,145 @@ export default function MainPage() {
             </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                Your Trusted Minerals Partner
+              </h3>
+              <div className="grid gap-8">
                 {[
-                  "Premium quality minerals with consistent specifications",
-                  "Global supply chain with reliable delivery",
-                  "Sustainable and ethical sourcing practices",
-                  "Technical expertise and customer support",
-                  "Competitive pricing and flexible terms",
+                  {
+                    icon: CheckCircle,
+                    title: "Premium Quality Assurance",
+                    description:
+                      "Every shipment meets the highest industry standards with comprehensive quality control and testing protocols",
+                  },
+                  {
+                    icon: Truck,
+                    title: "Global Supply Network",
+                    description:
+                      "Seamless worldwide delivery with optimized logistics, real-time tracking, and reliable supply chains",
+                  },
+                  {
+                    icon: Leaf,
+                    title: "Sustainable Practices",
+                    description:
+                      "Committed to environmental responsibility through ethical sourcing and eco-friendly operations",
+                  },
+                  {
+                    icon: Zap,
+                    title: "Technical Excellence",
+                    description:
+                      "Expert consultation and innovative solutions tailored to your specific mineral requirements",
+                  },
                 ].map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 mt-1 flex-shrink-0" style={{ color: COLORS.primary }} />
-                    <p className="text-gray-600">{benefit}</p>
-                  </div>
+                  <motion.div
+                    key={index}
+                    className="group p-6 rounded-2xl bg-gradient-to-r hover:shadow-lg transition-all duration-300"
+                    style={{
+                      background: `linear-gradient(135deg, ${COLORS.primary}08, ${COLORS.secondary}08, ${COLORS.liberty}05)`,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.15, duration: 0.6 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-r flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                        style={{ background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.secondary})` }}
+                      >
+                        <benefit.icon className="h-7 w-7 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-bold mb-3" style={{ color: COLORS.text }}>
+                          {benefit.title}
+                        </h4>
+                        <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-            <div className="relative">
-              <img src="/placeholder.svg?height=400&width=600" alt="BRB Team" className="rounded-2xl shadow-2xl" />
-            </div>
+            </motion.div>
+
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="/placeholder.svg?height=600&width=500"
+                  alt="BRB Mineraloop Advanced Processing Facility"
+                  className="w-full h-[600px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+                    <h4 className="font-bold text-xl mb-2" style={{ color: COLORS.text }}>
+                      Advanced Processing Excellence
+                    </h4>
+                    <p className="text-gray-600">
+                      State-of-the-art facilities ensuring consistent quality and efficient processing of all mineral
+                      types
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-gradient-to-r opacity-10"
+                style={{ background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.secondary})` }}
+              ></div>
+              <div
+                className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-gradient-to-r opacity-15"
+                style={{ background: `linear-gradient(135deg, ${COLORS.secondary}, ${COLORS.liberty})` }}
+              ></div>
+            </motion.div>
           </div>
+
+          <motion.div
+            className="text-center mt-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div
+              className="inline-block p-10 rounded-3xl bg-gradient-to-r shadow-2xl max-w-2xl"
+              style={{
+                background: `linear-gradient(135deg, ${COLORS.primary}12, ${COLORS.secondary}12, ${COLORS.liberty}08)`,
+                boxShadow: `0 20px 40px ${COLORS.liberty}15`,
+              }}
+            >
+              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+                Ready to Experience the Difference?
+              </h3>
+              <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+                Join industry leaders who trust BRB Mineraloop for their critical mineral supply needs
+              </p>
+              <button
+                onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}
+                className="inline-flex items-center justify-center rounded-2xl px-10 py-5 font-bold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r hover:scale-105 text-lg"
+                style={{
+                  background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
+                  boxShadow: `0 10px 30px ${COLORS.liberty}40`,
+                }}
+              >
+                Start Your Partnership <ArrowRight className="ml-3 h-6 w-6" />
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
