@@ -31,7 +31,7 @@ export default function Navbar() {
         >
           <div className="h-9 w-9 rounded-md overflow-hidden ring-1 ring-black/5 bg-white">
             <img
-              src="/logo.png"
+              src="/assets/Companies Logo FINAL-10.png"
               alt="BRB Mineraloop"
               onError={(e) => {
                 e.currentTarget.style.display = "none"
