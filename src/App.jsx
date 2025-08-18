@@ -3,13 +3,14 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import MainPage from "./pages/MainPage"
 import MineralDetail from "./pages/MineralDetail"
-
+import ScrollManager from "./components/ScrollManager"
 import TopBar from "./components/TopBar"
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen w-full text-slate-900 bg-white">
+    <ScrollManager />
+      <div className="min-h-screen w-full overflow-x-hidden text-slate-900 bg-white">
        <TopBar/>
         <Navbar />
 

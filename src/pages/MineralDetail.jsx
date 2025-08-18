@@ -1,12 +1,24 @@
-"use client"
-import { useParams, Link } from "react-router-dom"
-import { ArrowLeft, CheckCircle, FileText, Truck, Globe2 } from "lucide-react"
-import { COLORS, MINERALS, btnBase } from "../utils/constant"
-import { TCard, TCardBody } from "../components/ui/Card"
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, CheckCircle, FileText, Truck, Globe2 } from "lucide-react";
+import { COLORS, MINERALS, btnBase } from "../utils/constant";
+import { TCard, TCardBody } from "../components/ui/Card";
 
 export default function MineralDetail() {
-  const { mineralName } = useParams()
-  const mineral = MINERALS.find((m) => m.slug === mineralName)
+  const { mineralName } = useParams();
+  const mineral = MINERALS.find((m) => m.slug === mineralName);
+
+  // Safe initial state (works even if mineral is undefined for a moment)
+  const [imgSrc, setImgSrc] = useState(() =>
+    mineral?.image || (mineral ? `/assets/${mineral.slug}.jpg` : "/assets/logo.png")
+  );
+
+  // Reset image whenever mineral changes
+  useEffect(() => {
+    if (mineral) {
+      setImgSrc(mineral.image || `/assets/${mineral.slug}.jpg`);
+    }
+  }, [mineral?.slug]); // re-run when navigating to another mineral
 
   if (!mineral) {
     return (
@@ -16,22 +28,20 @@ export default function MineralDetail() {
           <ArrowLeft className="h-4 w-4" /> Back to Home
         </Link>
       </div>
-    )
+    );
   }
 
   return (
     <div className="py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-slate-600 mb-8">
-          <Link to="/" className="hover:text-slate-900">
-            Home
-          </Link>
+        {/* <div className="flex items-center gap-2 text-sm text-slate-600 mb-8">
+          <Link to="/" className="hover:text-slate-900">Home</Link>
           <span>/</span>
           <span>Minerals</span>
           <span>/</span>
           <span className="text-slate-900 font-medium">{mineral.name}</span>
-        </div>
+        </div> */}
 
         <div className="grid lg:grid-cols-3 gap-10">
           {/* Main Content */}
@@ -46,9 +56,24 @@ export default function MineralDetail() {
             <p className="text-lg text-slate-600 mb-8">{mineral.summary}</p>
 
             {/* Hero Image */}
-            <div className="rounded-2xl h-64 mb-8 shadow-lg" style={{ backgroundColor: COLORS.primary }}>
-              <div className="h-full flex items-center justify-center text-white text-xl font-semibold">
-                {mineral.name} Sample
+            <div className="relative rounded-2xl overflow-hidden mb-8 shadow-lg">
+              <img
+                key={`${mineral.slug}-${imgSrc}`}      // force remount on slug change
+                src={imgSrc}
+                alt={`${mineral.name} sample`}
+                className="w-full h-64 md:h-80 object-cover"
+                onError={() => {
+                  // try .png if .jpg fails, then fallback to logo
+                  setImgSrc((prev) =>
+                    prev.toLowerCase().endsWith(".jpg")
+                      ? `/assets/${mineral.slug}.png`
+                      : "/assets/logo.png"
+                  );
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              <div className="absolute bottom-3 left-3 text-white font-semibold text-lg drop-shadow">
+                {mineral.name}
               </div>
             </div>
 
@@ -78,10 +103,7 @@ export default function MineralDetail() {
                 <TCardBody>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {Object.entries(mineral.specifications).map(([key, value]) => (
-                      <div
-                        key={key}
-                        className="flex justify-between items-center py-2 border-b border-slate-100 last:border-b-0"
-                      >
+                      <div key={key} className="flex justify-between items-center py-2 border-b border-slate-100 last:border-b-0">
                         <span className="font-medium text-slate-700">{key}</span>
                         <span className="text-slate-600">{value}</span>
                       </div>
@@ -99,18 +121,10 @@ export default function MineralDetail() {
               <TCardBody>
                 <h3 className="font-semibold mb-4">Get Started</h3>
                 <div className="space-y-3">
-                  <Link
-                    to="/contact"
-                    className={`${btnBase} w-full text-white`}
-                    style={{ backgroundColor: COLORS.liberty }}
-                  >
+                  <Link to="/" className={`${btnBase} w-full text-white`} style={{ backgroundColor: COLORS.liberty }}>
                     Request Quote
                   </Link>
-                  <Link
-                    to="/contact"
-                    className={`${btnBase} w-full border-0`}
-                    style={{ color: COLORS.liberty, boxShadow: "inset 0 0 0 1px #25949B" }}
-                  >
+                  <Link to="/" className={`${btnBase} w-full border-0`} style={{ color: COLORS.liberty, boxShadow: "inset 0 0 0 1px #25949B" }}>
                     Download COA
                   </Link>
                 </div>
@@ -152,18 +166,16 @@ export default function MineralDetail() {
               <TCardBody>
                 <h3 className="font-semibold mb-4">Related Minerals</h3>
                 <div className="space-y-2">
-                  {MINERALS.filter((m) => m.slug !== mineralName)
-                    .slice(0, 3)
-                    .map((relatedMineral) => (
-                      <Link
-                        key={relatedMineral.slug}
-                        to={`/mineral/${relatedMineral.slug}`}
-                        className="block p-2 rounded-lg hover:bg-slate-50 text-sm"
-                      >
-                        <div className="font-medium">{relatedMineral.name}</div>
-                        <div className="text-xs text-slate-500 line-clamp-1">{relatedMineral.summary}</div>
-                      </Link>
-                    ))}
+                  {MINERALS.filter((m) => m.slug !== mineralName).slice(0, 3).map((relatedMineral) => (
+                    <Link
+                      key={relatedMineral.slug}
+                      to={`/mineral/${relatedMineral.slug}`}
+                      className="block p-2 rounded-lg hover:bg-slate-50 text-sm"
+                    >
+                      <div className="font-medium">{relatedMineral.name}</div>
+                      <div className="text-xs text-slate-500 line-clamp-1">{relatedMineral.summary}</div>
+                    </Link>
+                  ))}
                 </div>
               </TCardBody>
             </TCard>
@@ -171,5 +183,5 @@ export default function MineralDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
