@@ -13,11 +13,11 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img
                 src="/assets/Companies Logo FINAL-10.png"
-                className="w-18 h-18 object-contain"
+                className="w-22 h-22 object-contain"
                 alt="BRB Group Logo"
               />
             </div>
-            <div className="text-lg font-bold text-gray-900">BRB GROUP</div>
+            <div className="text-lg font-bold text-gray-900">BRB Mineraloop</div>
           </div>
 
           {/* Contact Section */}
@@ -34,7 +34,7 @@ export default function Footer() {
               </p>
 
               {/* Social Media Icons */}
-              <div className="flex gap-3 pt-4">
+              {/* <div className="flex gap-3 pt-4">
                 <a href="#" className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
                   <Facebook className="w-4 h-4 text-gray-600" />
                 </a>
@@ -53,7 +53,7 @@ export default function Footer() {
                 <a href="#" className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
                   <MessageCircle className="w-4 h-4 text-gray-600" />
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
