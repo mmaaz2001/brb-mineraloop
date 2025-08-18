@@ -49,20 +49,32 @@ export default function MainPage() {
               </motion.h3>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
-                BRB Mineraloop has been at the forefront of the minerals trading industry for over two decades. We
-                specialize in sourcing, processing, and delivering high-quality industrial minerals to clients
-                worldwide.
+                BRB Mineraloop is a leading minerals trading and processing company, and a proud subsidiary of the BRB Group. We specialize in the
+sourcing, processing, and supply of high-quality industrial minerals,
+serving diverse industries both locally and internationally. With a
+commitment to reliability, integrity, and innovation, BRB Mineraloop
+has built a strong reputation for excellence in the mineral sector.
+
               </p>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Our commitment to sustainable practices and innovative solutions has made us a preferred partner for
-                businesses across various industries including construction, manufacturing, and technology.
+
+
+<motion.h3 className="text-2xl font-bold mb-6" style={{ color: COLORS.text }}>
+                PART OF THE BRB GROUP 
+              </motion.h3>
+
+As a subsidiary of the BRB Group, BRB Mineraloop benefits from the
+Group’s extensive business network, financial strength, and decades
+of experience in trade and industry. This synergy allows us to expand
+our reach, diversify our product range, and deliver unmatched value
+to our customers
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              {/* <p className="text-gray-600 leading-relaxed">
                 With a dedicated team of experts and state-of-the-art facilities, we ensure that our minerals meet the
                 highest quality standards while minimizing environmental impact. Our vision is to lead the global
                 minerals trade with integrity, innovation, and a focus on sustainability.
-              </p>
+              </p> */}
 
 
             </div>
@@ -155,7 +167,7 @@ export default function MainPage() {
 
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
                           <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                            <p className="text-white/90 text-sm leading-relaxed mb-4 line-clamp-4">{mineral.summary}</p>
+                            <p className="text-white/90 text-sm leading-relaxed mb-4 line-clamp-4">{mineral.description}</p>
                             <div className="flex items-center justify-between">
                               <div
                                 className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r transition-all duration-300 hover:shadow-lg"
@@ -193,6 +205,7 @@ export default function MainPage() {
 
       {/* Sustainability Section */}
       <section id="sustainability" className="py-20 bg-white" style={patternStyle}>
+        
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <motion.div
@@ -338,7 +351,7 @@ export default function MainPage() {
               viewport={{ once: true, amount: 0.2 }}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 via-teal-600 to-blue-600 bg-clip-text text-transparent">
-                Why Choose BRB?
+                Why Choose BRB MINERALOOP?
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Experience the difference of working with industry leaders
@@ -357,61 +370,59 @@ export default function MainPage() {
                 Your Trusted Minerals Partner
               </h3>
               <div className="grid gap-8">
-                {[
-                  {
-                    icon: CheckCircle,
-                    title: "Premium Quality Assurance",
-                    description:
-                      "Every shipment meets the highest industry standards with comprehensive quality control and testing protocols",
-                  },
-                  {
-                    icon: Truck,
-                    title: "Global Supply Network",
-                    description:
-                      "Seamless worldwide delivery with optimized logistics, real-time tracking, and reliable supply chains",
-                  },
-                  {
-                    icon: Leaf,
-                    title: "Sustainable Practices",
-                    description:
-                      "Committed to environmental responsibility through ethical sourcing and eco-friendly operations",
-                  },
-                  {
-                    icon: Zap,
-                    title: "Technical Excellence",
-                    description:
-                      "Expert consultation and innovative solutions tailored to your specific mineral requirements",
-                  },
-                ].map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    className="group p-6 rounded-2xl bg-gradient-to-r hover:shadow-lg transition-all duration-300"
-                    style={{
-                      background: `linear-gradient(135deg, ${COLORS.primary}08, ${COLORS.secondary}08, ${COLORS.liberty}05)`,
-                    }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.15, duration: 0.6 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-r flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                        style={{ background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.secondary})` }}
-                      >
-                        <benefit.icon className="h-7 w-7 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="text-xl font-bold mb-3" style={{ color: COLORS.text }}>
-                          {benefit.title}
-                        </h4>
-                        <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+  {[
+    {
+      title: "Wide Portfolio",
+      description: "Wide portfolio of high-demand minerals.",
+    },
+    {
+      title: "Global Supply Chain",
+      description: "Reliable global supply chain.",
+    },
+    {
+      title: "Quality Commitment",
+      description: "Strong commitment to quality control.",
+    },
+    {
+      title: "Experienced Team",
+      description: "Professional and experienced team.",
+    },
+    {
+      title: "Competitive Advantage",
+      description: "Competitive market rates with timely delivery.",
+    },
+  ].map((benefit, index) => (
+    <motion.div
+      key={index}
+      className="group p-6 rounded-2xl bg-gradient-to-r hover:shadow-lg transition-all duration-300"
+      style={{
+        background: `linear-gradient(135deg, ${COLORS.primary}08, ${COLORS.secondary}08, ${COLORS.liberty}05)`,
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.15, duration: 0.6 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <div className="flex items-start gap-4">
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-r flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+          style={{ background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.secondary})` }}
+        >
+          {/* Simple check icon for all points */}
+          <CheckCircle className="h-7 w-7 text-white" />
+        </div>
+        <div>
+          <h4 className="text-xl font-bold mb-3" style={{ color: COLORS.text }}>
+            {benefit.title}
+          </h4>
+          <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+        </div>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
             </motion.div>
 
             <motion.div
