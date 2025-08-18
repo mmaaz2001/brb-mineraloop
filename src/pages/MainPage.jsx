@@ -522,42 +522,40 @@ export default function MainPage() {
             </motion.div>
 
             <motion.div
-              className="relative"
+              className="relative group rounded-3xl overflow-hidden shadow-2xl"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/placeholder.svg?height=600&width=500"
-                  alt="BRB Mineraloop Advanced Processing Facility"
-                  className="w-full h-[600px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+              {/* Image */}
+              <img
+                src="/assets/intro.jpg?height=600&width=500"
+                alt="BRB Mineraloop Advanced Processing Facility"
+                className="w-full h-[600px] object-cover transition-all duration-500 group-hover:blur-sm group-hover:scale-105"
+              />
 
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                    <h4 className="font-bold text-xl mb-2" style={{ color: COLORS.text }}>
-                      Advanced Processing Excellence
-                    </h4>
-                    <p className="text-gray-600">
-                      State-of-the-art facilities ensuring consistent quality and efficient processing of all mineral
-                      types
-                    </p>
-                  </div>
-                </div>
+              {/* Dark overlay when hover */}
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              {/* Text (centered on hover) */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center text-white px-6"
+                >
+                  <h4 className="text-2xl font-bold mb-2">Advanced Processing Excellence</h4>
+                  <p className="text-gray-200 max-w-md mx-auto">
+                    State-of-the-art facilities ensuring consistent quality and efficient processing of all mineral types
+                  </p>
+                </motion.div>
               </div>
-
-              <div
-                className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-gradient-to-r opacity-10"
-                style={{ background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.secondary})` }}
-              ></div>
-              <div
-                className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-gradient-to-r opacity-15"
-                style={{ background: `linear-gradient(135deg, ${COLORS.secondary}, ${COLORS.liberty})` }}
-              ></div>
             </motion.div>
+
+
+
           </div>
 
           <motion.div
@@ -594,8 +592,6 @@ export default function MainPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Contact Section */}
       <section id="contact" className="py-20 bg-gray-50" style={patternStyle}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
@@ -615,7 +611,6 @@ export default function MainPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
