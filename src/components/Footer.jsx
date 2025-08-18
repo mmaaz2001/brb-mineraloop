@@ -10,14 +10,14 @@ export default function Footer() {
           
           {/* Logo Section */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center ">
               <img
                 src="/assets/Companies Logo FINAL-10.png"
-                className="w-22 h-22 object-contain"
+                className="w-44 h-44 object-contain"
                 alt="BRB Group Logo"
               />
             </div>
-            <div className="text-lg font-bold text-gray-900">BRB Mineraloop</div>
+            
           </div>
 
           {/* Contact Section */}
