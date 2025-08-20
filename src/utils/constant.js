@@ -116,10 +116,10 @@ export const MINERALS = [
     sections: [
       {
         title: "Key Deposits in Pakistan",
-        type: "list",
+        content:"Pakistan hosts both sedimentary and magnetite iron ore deposits, concentrated in regions such as:",
         items: [
           "Hazara (Khyber Pakhtunkhwa) – Known for sedimentary iron ores with high iron content.",
-          "Balochistan – – Rich in magnetite ores, suitable for large-scale industrial applications.",
+          "Balochistan – Rich in magnetite ores, suitable for large-scale industrial applications.",
           "Other potential areas include Punjab and Sindh, where deposits remain underexplored.",
         ],
         content: "These reserves are estimated to contain iron content (Fe) up to 60%, making them suitable for commercial extraction and steel manufacturing."
@@ -136,7 +136,7 @@ export const MINERALS = [
       },
       {
         title: "Opportunities for Pakistan",
-        content:"Despite vast reserves, Pakistan’s iron ore sector remains underutilized, with much of the country relying on imported steel. By investing in modern mining, processing plants, and steel manufacturing facilities, Pakistan can:",
+        content:"Despite vast reserves, Pakistan’s iron ore sector remains underutilized, with much of the country relying on imported steel. By investing in modern mining, processing plants, and steel manufacturing facilities, Pakistan can :",
         items: [
           "Achieve self-sufficiency in steel production",
           "Reduce dependence on costly imports",

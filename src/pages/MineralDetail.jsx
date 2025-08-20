@@ -336,7 +336,7 @@ export default function MineralDetail() {
               }
 
               if (sec.title === "Key Deposits in Pakistan" && hasItems) {
-                beforeParas = [];
+                beforeParas = ["Pakistan hosts both sedimentary and magnetite iron ore deposits, concentrated in regionssuch as:"];
                 afterParas = ["These reserves are estimated to contain iron content (Fe) up to 60%, making them suitable for commercial extraction and steel manufacturing."];
               }
 
