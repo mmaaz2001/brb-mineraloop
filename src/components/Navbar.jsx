@@ -5,7 +5,7 @@ import { COLORS, MINERALS } from "../utils/constant";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);          // desktop Minerals
-  const [mobileOpen, setMobileOpen] = useState(false);                  // whole mobile panel
+  const [mobileOpen, setMobileOpen] = useState(false);                  // whole mobile/tablet panel
   const [mobileMineralsOpen, setMobileMineralsOpen] = useState(false);  // mobile Minerals
   const location = useLocation();
   const isMainPage = location.pathname === "/";
@@ -23,14 +23,12 @@ export default function Navbar() {
     }
   };
 
-  // Close menus on route change
   useEffect(() => {
     setIsDropdownOpen(false);
     setMobileOpen(false);
     setMobileMineralsOpen(false);
   }, [location.pathname]);
 
-  // Close desktop dropdown when clicking outside
   useEffect(() => {
     const onClick = (e) => {
       if (desktopDropRef.current && !desktopDropRef.current.contains(e.target)) {
@@ -41,19 +39,20 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
+  // a little tighter on mid screens
   const navBtn =
-    "text-slate-700 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded px-1";
+    "text-slate-700 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded px-1 md:px-2";
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b">
-      <nav className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
+      <nav className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 h-16 lg:h-16 flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-md"
+          className="flex items-center gap-2 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-md"
           onClick={() => setMobileOpen(false)}
         >
-          <div className="h-9 w-9 rounded-md overflow-hidden ring-1 ring-black/5 bg-white">
+          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden ring-1 ring-black/5 bg-white shrink-0">
             <img
               src="/assets/Companies Logo FINAL-10.png"
               alt="BRB Mineraloop"
@@ -63,11 +62,13 @@ export default function Navbar() {
               className="h-full w-full object-contain"
             />
           </div>
-          <span className="font-semibold tracking-tight">BRB Mineraloop</span>
+          <span className="font-semibold tracking-tight text-sm sm:text-base">
+            BRB Mineraloop
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 text-sm">
+        {/* Desktop nav (≥1024px only) */}
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm">
           <button onClick={() => scrollToSection("about")} className={navBtn}>
             About
           </button>
@@ -86,7 +87,7 @@ export default function Navbar() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg ring-1 ring-black/5 py-2 z-50">
+              <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg ring-1 ring-black/5 py-2 z-50 max-h-[60vh] overflow-auto">
                 {MINERALS.map((m) => (
                   <Link
                     key={m.slug}
@@ -116,20 +117,20 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* CTA (desktop) */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* CTA (desktop only) */}
+        <div className="hidden lg:flex items-center gap-2">
           <button
             onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-white"
+            className="inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-white"
             style={{ backgroundColor: COLORS.liberty }}
           >
             Request a Quote
           </button>
         </div>
 
-        {/* Hamburger (mobile) */}
+        {/* Hamburger (phones + tablets) */}
         <button
-          className="md:hidden inline-flex items-center justify-center rounded-md p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          className="lg:hidden inline-flex items-center justify-center rounded-md p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Open menu"
           aria-expanded={mobileOpen}
@@ -138,12 +139,8 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile panel */}
-      <div
-        className={`md:hidden border-t bg-white shadow-sm ${
-          mobileOpen ? "block" : "hidden"
-        }`}
-      >
+      {/* Mobile/Tablet panel (≤1024px) */}
+      <div className={`lg:hidden border-t bg-white shadow-sm ${mobileOpen ? "block" : "hidden"}`}>
         <nav className="px-4 py-3 space-y-1">
           <button
             onClick={() => {
@@ -155,7 +152,7 @@ export default function Navbar() {
             About
           </button>
 
-          {/* Mobile Minerals collapsible */}
+          {/* Minerals collapsible */}
           <div className="w-full">
             <button
               onClick={() => setMobileMineralsOpen((v) => !v)}
@@ -169,11 +166,11 @@ export default function Navbar() {
             </button>
 
             <div
-              className={`overflow-hidden transition-all ${
+              className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
                 mobileMineralsOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="pl-3 py-1 overflow-auto h-[15vh]">
+              <div className="pl-3 py-1 overflow-auto max-h-[20vh]">
                 {MINERALS.map((m) => (
                   <Link
                     key={m.slug}
@@ -228,13 +225,13 @@ export default function Navbar() {
             Contact
           </button>
 
-          {/* CTA inside mobile menu */}
+          {/* CTA inside mobile/tablet menu */}
           <button
             onClick={() => {
               scrollToSection("contact");
               setMobileOpen(false);
             }}
-            className="mt-2 w-full inline-flex items-center justify-center rounded-xl px-4 py-2 font-medium shadow text-white"
+            className="mt-2 w-full inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium shadow text-white"
             style={{ backgroundColor: COLORS.liberty }}
           >
             Request a Quote
