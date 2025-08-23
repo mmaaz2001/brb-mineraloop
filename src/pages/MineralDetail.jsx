@@ -221,18 +221,7 @@ export default function MineralDetail() {
   const { mineralName } = useParams();
   const mineral = MINERALS.find((m) => m.slug === mineralName);
 
-  if (!mineral) {
-    return (
-      <div className="py-20 text-center bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center justify-center">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/30">
-          <h1 className="text-2xl font-semibold mb-4">Mineral not found</h1>
-          <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-            <ArrowLeft className="h-4 w-4" /> Back to Home
-          </Link>
-        </div>
-      </div>
-    );
-  }
+
 
   const [imgSrc, setImgSrc] = useState(() => mineral?.image || `/assets/${mineral.slug}.jpg`);
   useEffect(() => {
@@ -248,21 +237,6 @@ export default function MineralDetail() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 relative">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-slate-600 mb-8 bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30 shadow-sm w-fit" aria-label="Breadcrumb">
-          <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
-          <span>/</span>
-          <span>Minerals</span>
-          <span>/</span>
-          <span className="text-slate-900 font-medium bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">{mineral.name}</span>
-        </nav>
-
-        {/* Back button */}
-        <div className="flex items-center gap-4 mb-6">
-          <Link to="/" className="group inline-flex items-center gap-2 px-5 py-3 bg-white/70 backdrop-blur-sm text-slate-600 hover:text-white rounded-full border border-white/30 hover:bg-gradient-to-r hover:from-blue-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-lg">
-            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Back
-          </Link>
-        </div>
 
         {/* Title + summary */}
         <div className="text-center mb-12">

@@ -252,10 +252,11 @@ to our customers
               >
 
                 <Card
-                  key={index}
-                  className="text-center p-8 bg-gradient-to-br"
-                  style={{ background: `linear-gradient(135deg, ${COLORS.primary}10, ${COLORS.secondary}10)` }}
-                >
+  key={index}
+  className="text-center p-8 bg-gradient-to-br transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2"
+  style={{ background: `linear-gradient(135deg, ${COLORS.primary}10, ${COLORS.secondary}10)` }}
+>
+
                   <div
                     className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center bg-gradient-to-r"
                     style={{ background: `linear-gradient(135deg, ${COLORS.secondary}, ${COLORS.liberty})` }}
