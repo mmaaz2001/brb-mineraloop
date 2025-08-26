@@ -1,1 +1,29 @@
 @import "tailwindcss";
+/* Subtle dotted hero background, like your reference */
+.hero-dots {
+  /* tweak these to taste */
+  --bg: #f8f4f4;          /* page base */
+  --dot: #cdd1d4;         /* light gray dots (square-ish feel) */
+  --gap: 40px;            /* spacing between dots */
+  --size: 1.6px;          /* dot size */
+
+  /* layer 1: dot grid */
+  background:
+    radial-gradient(var(--dot) var(--size), transparent var(--size)) 0 0 / var(--gap) var(--gap),
+
+    /* optional soft blobs on the right like the ref (very subtle) */
+    radial-gradient(60% 50% at 75% 40%, rgba(16,185,129,0.12), transparent 60%),
+    radial-gradient(45% 35% at 65% 65%, rgba(8,145,178,0.10), transparent 60%),
+
+    /* base */
+    var(--bg);
+
+}
+
+.hero-dots::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 65%, rgba(0,0,0,0.06) 100%);
+}
+
