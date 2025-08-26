@@ -43,8 +43,8 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   // Base navBtn style
-  const navBtn =
-    "text-slate-700 hover:text-sky-600 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded px-1 md:px-2 hover:underline hover:decoration-overline hover:decoration-2 hover:underline-offset-4";
+const navBtn =
+  "relative text-gray-500 hover:text-sky-600 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded px-1 md:px-2 cursor-pointer after:content-[''] after:absolute after:right-0 after:bottom-[-10px] after:h-[2px] after:w-0 after:bg-sky-600 after:transition-all after:duration-300 hover:after:w-full hover:after:left-0";
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70 border-b">
@@ -71,81 +71,86 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav (≥1024px only) */}
-        <div className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm">
-          <button
-            onClick={() => scrollToSection("about")}
-            className={`${navBtn} ${isActive("/#about") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
-          >
-            About
-          </button>
-
-          <div className="relative" ref={desktopDropRef}>
+        <div className="hidden lg:flex items-center gap-4 xl:gap-9 text-md font-bold">
+          <div  className="flex items-center gap-1 xl:gap-3">
             <button
-              onClick={() => setIsDropdownOpen((v) => !v)}
-              className={`flex items-center gap-1 ${navBtn}`}
-              aria-haspopup="menu"
-              aria-expanded={isDropdownOpen}
+              onClick={() => scrollToSection("about")}
+              className={`${navBtn} ${isActive("/#about") ? "text-sky-600  underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
             >
-              Minerals
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
-              />
+              About
             </button>
 
-            {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg ring-1 ring-black/5 py-2 z-50 max-h-[60vh] overflow-auto">
-                {MINERALS.map((m) => (
-                  <Link
-  key={m.slug}
-  to={`/mineral/${m.slug}`}
-  onClick={() => setIsDropdownOpen(false)}
-  className="block px-4 py-3 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-100 hover:text-sky-700 transition-all duration-300 rounded-lg"
->
-  <div className="font-medium">{m.name}</div>
-  <div className="text-xs text-slate-500 mt-1 line-clamp-2">{m.summary}</div>
-</Link>
+            <div className="relative" ref={desktopDropRef}>
+              <button
+                onClick={() => setIsDropdownOpen((v) => !v)}
+                className={`flex items-center gap-1 ${navBtn}`}
+                aria-haspopup="menu"
+                aria-expanded={isDropdownOpen}
+              >
+                Minerals
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+                />
+              </button>
 
-                ))}
-              </div>
-            )}
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-lg ring-1 ring-black/5 py-2 z-50 max-h-[60vh] overflow-auto">
+                  {MINERALS.map((m) => (
+                    <Link
+                      key={m.slug}
+                      to={`/mineral/${m.slug}`}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="block px-4 py-3 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-100 hover:text-sky-700 transition-all duration-300 rounded-lg"
+                    >
+                      <div className="font-medium">{m.name}</div>
+                      <div className="text-xs text-slate-500 mt-1 line-clamp-2">{m.summary}</div>
+                    </Link>
+
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() => scrollToSection("sustainability")}
+              className={`${navBtn} ${isActive("/#sustainability") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
+            >
+              Sustainability
+            </button>
+            <button
+              onClick={() => scrollToSection("operations")}
+              className={`${navBtn} ${isActive("/#operations") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
+            >
+              Operations
+            </button>
+            <button
+              onClick={() => scrollToSection("why-brb")}
+              className={`${navBtn} ${isActive("/#why-brb") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
+            >
+              Why BRB
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className={`${navBtn} ${isActive("/#contact") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
+            >
+              Contact
+            </button>
           </div>
-
-          <button
-            onClick={() => scrollToSection("sustainability")}
-            className={`${navBtn} ${isActive("/#sustainability") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
-          >
-            Sustainability
-          </button>
-          <button
-            onClick={() => scrollToSection("operations")}
-            className={`${navBtn} ${isActive("/#operations") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
-          >
-            Operations
-          </button>
-          <button
-            onClick={() => scrollToSection("why-brb")}
-            className={`${navBtn} ${isActive("/#why-brb") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
-          >
-            Why BRB
-          </button>
-          <button
-            onClick={() => scrollToSection("contact")}
-            className={`${navBtn} ${isActive("/#contact") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""}`}
-          >
-            Contact
-          </button>
+          <div className="pl-5" >
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              style={{ backgroundColor: COLORS.liberty }}
+            >
+              Request a Quote
+            </button>
+          </div>
         </div>
 
         {/* CTA (desktop only) */}
-        <div className="hidden lg:flex items-center gap-2">
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style={{ backgroundColor: COLORS.liberty }}
-          >
-            Request a Quote
-          </button>
-        </div>
+        {/* <div className="hidden lg:flex items-center gap-2"> */}
+
+        {/* </div> */}
 
         {/* Hamburger (phones + tablets) */}
         <button
@@ -166,9 +171,8 @@ export default function Navbar() {
               scrollToSection("about");
               setMobileOpen(false);
             }}
-            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${
-              isActive("/#about") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
-            }`}
+            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${isActive("/#about") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
+              }`}
           >
             About
           </button>
@@ -187,9 +191,8 @@ export default function Navbar() {
             </button>
 
             <div
-              className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
-                mobileMineralsOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
-              }`}
+              className={`overflow-hidden transition-[max-height,opacity] duration-300 ${mobileMineralsOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
+                }`}
             >
               <div className="pl-3 py-1 overflow-auto max-h-[20vh]">
                 {MINERALS.map((m) => (
@@ -200,11 +203,10 @@ export default function Navbar() {
                       setMobileOpen(false);
                       setMobileMineralsOpen(false);
                     }}
-                    className={`block px-2 py-2 text-sm rounded hover:bg-slate-50 ${
-                      location.pathname === `/mineral/${m.slug}`
-                        ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4"
-                        : ""
-                    }`}
+                    className={`block px-2 py-2 text-sm rounded hover:bg-slate-50 ${location.pathname === `/mineral/${m.slug}`
+                      ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4"
+                      : ""
+                      }`}
                   >
                     {m.name}
                   </Link>
@@ -218,9 +220,8 @@ export default function Navbar() {
               scrollToSection("sustainability");
               setMobileOpen(false);
             }}
-            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${
-              isActive("/#sustainability") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
-            }`}
+            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${isActive("/#sustainability") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
+              }`}
           >
             Sustainability
           </button>
@@ -229,9 +230,8 @@ export default function Navbar() {
               scrollToSection("operations");
               setMobileOpen(false);
             }}
-            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${
-              isActive("/#operations") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
-            }`}
+            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${isActive("/#operations") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
+              }`}
           >
             Operations
           </button>
@@ -240,9 +240,8 @@ export default function Navbar() {
               scrollToSection("why-brb");
               setMobileOpen(false);
             }}
-            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${
-              isActive("/#why-brb") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
-            }`}
+            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${isActive("/#why-brb") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
+              }`}
           >
             Why BRB
           </button>
@@ -251,9 +250,8 @@ export default function Navbar() {
               scrollToSection("contact");
               setMobileOpen(false);
             }}
-            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${
-              isActive("/#contact") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
-            }`}
+            className={`w-full text-left px-2 py-2 rounded hover:bg-slate-50 ${isActive("/#contact") ? "text-sky-600 underline decoration-dashed decoration-2 underline-offset-4" : ""
+              }`}
           >
             Contact
           </button>
